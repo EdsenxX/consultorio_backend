@@ -40,12 +40,13 @@ const citas = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
+        default: "Pendiente",
+        required: false
     },
     created_by: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
-        required: true
+        required: false
     },
 }, {
     timestamps: true

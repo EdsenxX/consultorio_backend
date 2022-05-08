@@ -16,4 +16,4 @@ const doctor = new mongoose.Schema({
 
 const Doctor = mongoose.model("Doctor", doctor);
 
-export default Doctor;
+module.exports = Doctor;
