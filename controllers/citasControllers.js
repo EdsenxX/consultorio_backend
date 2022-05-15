@@ -161,7 +161,7 @@ const updateCita = (req, res) => {
     doctor: params.doctor,
     notes: params.notes,
   };
-  Cita.updateOne({id}, newCita)
+  Cita.updateOne({ id }, newCita)
     .then((cita) => {
       res.status(200).json({
         message: "Cita actualizada",
@@ -185,9 +185,59 @@ const updateCita = (req, res) => {
     });
 };
 
+const getCitas = (req, res) => {
+  return Cita.aggregate([
+    {
+      $lookup: {
+        from: "doctors",
+        localField: "doctor",
+        foreignField: "_id",
+        as: "doctor",
+      },
+    },
+    { $sort: { date_appointment: 1 } },
+    {
+      $project: {
+        _id: 1,
+        date_appointment: 1,
+        paciente: 1,
+        doctor: {
+          _id: 1,
+          first_name: 1,
+          last_name: 1,
+          consultorio: 1,
+        },
+        notes: 1,
+      },
+    },
+  ])
+    .then((citas) => {
+      res.status(200).json({
+        message: "Citas obtenidas",
+        citas: citas,
+        status: {
+          code: 200,
+          message: "OK",
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        message: `Error al obtener citas`,
+        error: err,
+        status: {
+          code: 500,
+          message: "Internal Server Error",
+        },
+      });
+    });
+};
+
 module.exports = {
   create,
   getAllByActualDay,
   getCita,
   updateCita,
+  getCitas,
 };
