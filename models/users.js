@@ -3,21 +3,21 @@ const mongooseBcrypt = require("mongoose-bcrypt");
 const Doctor = require("./doctor");
 
 const userSchema = new mongoose.Schema({
-    first_name: {
+    firstName: {
         type: String,
         required: true
     },
-    last_name: {
+    lastName: {
         type: String,
         required: true
     },
-    birth_date: {
+    birthDate: {
         type: Date,
         required: true
     },
     email: {
         type: String,
-        required: false
+        required: true
     },
     phone: {
         type: String,
@@ -25,16 +25,11 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        required: true
+        required: false
     },
     active: {
         type: Boolean,
         default: true
-    },
-    created_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-        required: true
     },
 }, {
     timestamps: true
