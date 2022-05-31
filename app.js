@@ -13,16 +13,17 @@ db.connect();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var citasRouter = require('./routes/citas');
+var authRouter = require('./routes/auth');
 
 var app = express();
 app.use(cors());
 
-// app.use(
-//   jwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }).unless({
-//     path: ["/auth", "/users"],
-//     method: ["GET"],
-//   })
-// );
+app.use(
+  jwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }).unless({
+    path: ["/auth"],
+    method: ["POST"],
+  })
+);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/citas', citasRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

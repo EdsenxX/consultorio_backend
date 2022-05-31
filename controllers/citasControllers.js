@@ -15,10 +15,6 @@ const validParams = [
 
 const create = (req, res) => {
   const params = paramsBuilder(validParams, req.body);
-  console.log(params);
-  console.log(
-    moment(`${params.date} ${params.time}`, "YYYY-MM-DD HH:mm").utc().toDate()
-  );
   const newCita = {
     paciente: {
       first_name: params.firstName,

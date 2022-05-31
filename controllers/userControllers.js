@@ -1,7 +1,7 @@
 const User = require("../models/users");
 const paramsBuilder = require("../utils/paramsBuilder");
 
-const validParams = ["firstName", "lastName", "birthDate", "phone", "email"];
+const validParams = ["firstName", "lastName", "birthDate", "phone", "email", "password"];
 
 const create = (req, res) => {
   const params = paramsBuilder(validParams, req.body);
