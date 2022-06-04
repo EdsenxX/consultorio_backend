@@ -83,8 +83,8 @@ const getAllByActualDay = (req, res) => {
         paciente: 1,
         doctor: {
           _id: 1,
-          first_name: 1,
-          last_name: 1,
+          firstName: 1,
+          lastName: 1,
           consultorio: 1,
         },
         notes: 1,
@@ -199,8 +199,8 @@ const getCitas = (req, res) => {
         paciente: 1,
         doctor: {
           _id: 1,
-          first_name: 1,
-          last_name: 1,
+          firstName: 1,
+          lastName: 1,
           consultorio: 1,
         },
         notes: 1,

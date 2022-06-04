@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 
 const doctor = new mongoose.Schema({
-    _user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
         required: true
     },
     consultorio: {
